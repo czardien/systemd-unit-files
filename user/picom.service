@@ -1,0 +1,12 @@
+[Unit]
+Description=Enables transparency at start
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+RemainAfterExit=true
+ExecStart=picom -b
+ExecStop=killall picom
+
+[Install]
+WantedBy=multi-user.target

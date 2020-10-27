@@ -1,0 +1,11 @@
+[Unit]
+Description=Autolock screen after 10 minutes
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+ExecStart=xautolock -time 10 -locker /home/adrien/systemd-services/lock-screen/lock
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

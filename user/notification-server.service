@@ -1,0 +1,11 @@
+[Unit]
+Description=Dunst notification server
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+RemainAfterExit=true
+ExecStart=/usr/bin/dunst
+
+[Install]
+WantedBy=default.target
