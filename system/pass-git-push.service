@@ -1,11 +1,11 @@
 [Unit]
-Description=Synchronizes Firefox login data with pass
+Description=pass git push
 
 [Service]
 Type=oneshot
-Environment=DISPLAY=:0
+User=adrien
 RemainAfterExit=true
 ExecStart=/bin/bash -c 'pass git push'
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target

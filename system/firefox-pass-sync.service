@@ -1,11 +1,11 @@
 [Unit]
-Description=Synchronizes Firefox login data with pass
+Description=sync pass and firefox login data
 
 [Service]
 Type=oneshot
-Environment=DISPLAY=:0
-RemainAfterExit=true
+User=adrien
+RemainAfterExit=no
 ExecStart=/bin/bash -c '/usr/bin/python /home/adrien/code/firefox_decrypt/firefox_decrypt.py --export-pass --no-interactive --choice 2 --pass-compat browserpass --pass-prefix www'
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
