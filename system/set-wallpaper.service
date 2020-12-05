@@ -1,0 +1,12 @@
+[Unit]
+Description=pass git push
+
+[Service]
+Type=oneshot
+User=adrien
+RemainAfterExit=true
+Environment=DISPLAY=:0
+ExecStart=/bin/bash -c '/usr/bin/feh --bg-fill $HOME/.wallpaper'
+
+[Install]
+WantedBy=multi-user.target
