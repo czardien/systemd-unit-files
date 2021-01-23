@@ -8,4 +8,4 @@ Environment=DISPLAY=:0
 ExecStart=/bin/bash -c '/usr/bin/feh --bg-fill $HOME/.wallpaper'
 
 [Install]
-WantedBy=graphical.target
+WantedBy=default.target

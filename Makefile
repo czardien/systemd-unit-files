@@ -5,34 +5,34 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-## build                                : tmp/.install.sentinel
-build: tmp/.install.sentinel tmp/.systemctl-daemon-reload.sentinel
+## build                                : tmp/.sentinel.systemctl-daemon-reload
+build: tmp/.sentinel.systemctl-daemon-reload
 .PHONY: build
 
-## clean                                : forces recursive removes folders tmp/ and out/
+## clean                                : forces recursive removes folders tmp/
 clean:
 	rm -rf tmp
 .PHONY: clean
 
-## tmp/.systemctl-daemon-reload.sentinel: reload systemctl daemon
-tmp/.systemctl-daemon-reload.sentinel:
+## tmp/.sentinel.systemctl-daemon-reload: reload systemctl daemon
+tmp/.sentinel.systemctl-daemon-reload: tmp/.sentinel.install-all
 	@mkdir -p $(@D)
 	systemctl daemon-reload
 	touch $@
 
-## tmp/.install.sentinel                : install all unit files into respective system and user destinations
-tmp/.install.sentinel: tmp/.install-user.sentinel tmp/.install-system.sentinel
+## tmp/.sentinel.install-all            : install all unit files
+tmp/.sentinel.install-all: tmp/.sentinel.install-user tmp/.sentinel.install-system
 	@mkdir -p $(@D)
 	touch $@
 
-## tmp/.install-system.sentinel         : install all system systemd unit files
-tmp/.install-system.sentinel: $(shell find system -type f)
+## tmp/.sentinel.install-system         : install all system systemd unit files
+tmp/.sentinel.install-system: $(shell find system -type f -path "./system/*")
 	@mkdir -p $(@D)
 	install -m 0755 -C -v system/* /etc/systemd/system/
 	touch $@
 
-## tmp/.install-user.sentinel           : install all user systemd unit files
-tmp/.install-user.sentinel: $(shell find user -type f)
+## tmp/.sentinel.install-user           : install all user systemd unit files
+tmp/.sentinel.install-user: $(shell find user -type f -path "./user/*")
 	@mkdir -p $(@D)
 	install -m 0755 -C -v user/* /etc/systemd/user/
 	touch $@
