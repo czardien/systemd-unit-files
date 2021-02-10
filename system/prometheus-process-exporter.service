@@ -1,0 +1,11 @@
+[Unit]
+Description=prometheus process exporter
+
+[Service]
+Type=simple
+User=adrien
+RemainAfterExit=no
+ExecStart=/bin/bash -c '/usr/bin/process-exporter -config.path /home/adrien/.config/process-exporter/config'
+
+[Install]
+WantedBy=multi-user.target

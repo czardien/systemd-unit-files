@@ -1,0 +1,12 @@
+[Unit]
+Description=pgadmin4
+
+[Service]
+Type=simple
+Environment=DISPLAY=:0
+User=adrien
+RemainAfterExit=no
+ExecStart=/bin/bash -c '/usr/bin/pgadmin4'
+
+[Install]
+WantedBy=multi-user.target

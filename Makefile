@@ -5,9 +5,14 @@ SHELL := bash
 MAKEFLAGS += --warn-undefined-variables
 MAKEFLAGS += --no-builtin-rules
 
-## build                                : tmp/.sentinel.systemctl-daemon-reload
-build: tmp/.sentinel.systemctl-daemon-reload
-.PHONY: build
+## help                                 : provides help
+help : Makefile
+	@sed -n 's/^##//p' $<
+.PHONY : help
+
+## install                              : tmp/.sentinel.systemctl-daemon-reload
+install: tmp/.sentinel.systemctl-daemon-reload
+.PHONY: install
 
 ## clean                                : forces recursive removes folders tmp/
 clean:
@@ -36,8 +41,3 @@ tmp/.sentinel.install-user: $(shell find user -type f -path "./user/*")
 	@mkdir -p $(@D)
 	install -m 0755 -C -v user/* /etc/systemd/user/
 	touch $@
-
-## help                                 : provides help
-help : Makefile
-	@sed -n 's/^##//p' $<
-.PHONY : help
